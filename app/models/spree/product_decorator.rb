@@ -24,7 +24,9 @@ Spree::Product.class_eval do
     variants_including_master.each do |variant|
       unless variant.suppliers.pluck(:id).include?(supplier.id)
         variant.suppliers << supplier
-        supplier.stock_locations.each { |location| location.propagate_variant(variant) }
+        supplier.stock_locations.each do |location|
+          location.propagate_variant(variant) if location.stock_items.where(variant: variant, deleted_at: nil).first.nil?
+        end
       end
     end
   end
