@@ -3,5 +3,5 @@
 <% if can? :manage, Spree::Supplier %>
   <!-- TODO allow assignment to variants -->
   <%= label_tag :suppliers %><br/>
-  <%= collection_select(:product, :supplier_ids, @suppliers.all, :id, :name, { :include_blank => 'None' }, { :class => 'select2', multiple: true }) %>
+  <%= collection_select(:product, :supplier_ids, @suppliers.all, :id, :name, { :include_blank => 'None' }, { :class => 'select2' }) %>
 <% end %>
